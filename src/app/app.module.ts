@@ -18,6 +18,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
 import { FirebaseService } from './firebase.service';
+import { ProfileComponent } from './profile/profile.component';
 
 
 const appRoutes: Routes = [
@@ -25,6 +26,7 @@ const appRoutes: Routes = [
   { path: 'leaderboard', component: LeaderboardComponent },
   { path: 'matches', component: MatchesComponent },
   { path: 'bets', component: BetsComponent },
+  { path: 'profile', component: ProfileComponent },
   { path: 'teams', component: TeamsComponent },
   { path: 'teams/:id', component: TeamComponent },
 ];
@@ -38,7 +40,8 @@ const appRoutes: Routes = [
     MatchesComponent,
     BetsComponent,
     TeamsComponent,
-    TeamComponent
+    TeamComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,7 @@ const appRoutes: Routes = [
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
   ],
   providers: [
-    // FirebaseService
+    FirebaseService
   ],
   bootstrap: [AppComponent]
 })

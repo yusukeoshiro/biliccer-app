@@ -1,0 +1,9 @@
+<div class="container center" style="margin-top: 100px;">
+
+  <div *ngIf="firebaseService.user !== undefined" style="margin: 30px;">
+    {{ firebaseService.user.displayName }} / {{ firebaseService.user.email }}
+  </div>
+
+  <a class="waves-effect waves-light btn large" (click)="signin();" *ngIf="firebaseService.user === undefined">Sign in with Google Account</a>
+  <a class="waves-effect waves-light btn large" (click)="signout();" *ngIf="firebaseService.user !== undefined">Sign Out</a>
+</div>

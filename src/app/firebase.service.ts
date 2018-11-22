@@ -1,17 +1,28 @@
 import { Component, Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { auth } from 'firebase/app';
 
 @Injectable()
 export class FirebaseService {
   private firebase: any;
   private firestore: any;
+  public user: any;
 
-  constructor() {
-    // console.log('test');
-    // console.log(this.firebase);
-    // .subscribe((data) => {
-    //   console.log(data);
-    // })
+  constructor( public afAuth: AngularFireAuth ) {
+    this.user = undefined;
+    afAuth.authState.subscribe(
+      (data) => {
+        if (data) {
+          this.user = {
+            email: data.email,
+            displayName: data.displayName,
+            uid: data.uid
+          }
+        } else {
+          this.user = undefined;
+        }
+      }
+    );
+    // afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
   }
 }

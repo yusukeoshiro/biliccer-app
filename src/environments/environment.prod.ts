@@ -1,11 +1,11 @@
 export const environment = {
   production: true,
   firebase: {
-    apiKey: "AIzaSyDfTmRruNMgQK9cQw02Ip2cprt1gICi5-Y",
-    authDomain: "biliccer-app.firebaseapp.com",
-    databaseURL: "https://biliccer-app.firebaseio.com",
-    projectId: "biliccer-app",
-    storageBucket: "biliccer-app.appspot.com",
-    messagingSenderId: "914755066738"
+    apiKey: "AIzaSyCmP9svVgqqol8zYJmh20GSBkDR-nnYHBw",
+    authDomain: "biliccer-2018.firebaseapp.com",
+    databaseURL: "https://biliccer-2018.firebaseio.com",
+    projectId: "biliccer-2018",
+    storageBucket: "biliccer-2018.appspot.com",
+    messagingSenderId: "483817025762"
   }
 };
