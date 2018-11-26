@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-leaderboard',
@@ -7,7 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LeaderboardComponent implements OnInit {
 
-  constructor() { }
+  teams: Array<any> = new Array();
+  users: Array<any> = new Array();
+
+  constructor(db: AngularFirestore) {
+    db.collection('teams', ref => ref.orderBy('win_count', 'desc')).snapshotChanges()
+      .subscribe( (data) => {
+        this.teams = new Array();
+        for ( const team of data) {
+          this.teams.push( team.payload.doc.data() );
+        }
+      })
+
+    db.collection('users', ref => ref.orderBy('win_count', 'desc')).snapshotChanges()
+      .subscribe( (data) => {
+        this.users = new Array();
+        for ( const user of data) {
+          this.users.push( user.payload.doc.data() );
+        }
+      })
+  }
 
   ngOnInit() {
   }

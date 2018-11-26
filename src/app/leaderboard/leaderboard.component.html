@@ -1,3 +1,42 @@
-<p>
-  leaderboard works!
-</p>
+
+
+<div class="container">
+  <h4>Teams Leaderboard</h4>
+  <table>
+    <thead>
+      <tr>
+          <th>Team Name</th>
+          <th>Wins</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let team of teams">
+        <td>{{team.name}}</td>
+        <td>{{team.win_count}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+<div class="container">
+    <h4>TOTO Leaderboard</h4>
+    <table>
+      <thead>
+        <tr>
+            <th>Name</th>
+            <th>Wins</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{user.displayName}}</td>
+          <td>{{user.win_count}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
