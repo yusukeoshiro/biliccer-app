@@ -20,7 +20,7 @@
             <div class="col s6 center">
               <div>{{ match.team1_bets }}</div>
               <div>
-                  <a class="waves-effect waves-light btn-small"
+                  <a class="waves-effect waves-light btn-small blue darken-2"
                     [ngClass]="{disabled: getBettedTeam(match) !== null}"
                     (click)="placeBet(match.id, match.team1.id);">Bet on {{ match.team1.name }}</a> <br/>
                   <span *ngIf="getBettedTeam(match) === match.team1.id">Your bet</span>
@@ -29,7 +29,7 @@
             <div class="col s6 center">
               <div>{{ match.team2_bets }}</div>
               <div>
-                  <a class="waves-effect waves-light btn-small"
+                  <a class="waves-effect waves-light btn-small blue darken-2"
                     [ngClass]="{disabled: getBettedTeam(match) !== null}"
                     (click)="placeBet(match.id, match.team2.id);">Bet on {{ match.team2.name }}</a> <br/>
                   <span *ngIf="getBettedTeam(match) === match.team2.id">Your bet</span>

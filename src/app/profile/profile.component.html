@@ -4,6 +4,6 @@
     {{ firebaseService.user.displayName }} / {{ firebaseService.user.email }}
   </div>
 
-  <a class="waves-effect waves-light btn large" (click)="signin();" *ngIf="firebaseService.user === undefined">Sign in with Google Account</a>
-  <a class="waves-effect waves-light btn large" (click)="signout();" *ngIf="firebaseService.user !== undefined">Sign Out</a>
+  <a class="waves-effect waves-light btn large blue darken-2" (click)="signin();" *ngIf="firebaseService.user === undefined">Sign in with Google Account</a>
+  <a class="waves-effect waves-light btn large blue darken-2" (click)="signout();" *ngIf="firebaseService.user !== undefined">Sign Out</a>
 </div>
