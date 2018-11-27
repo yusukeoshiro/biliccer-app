@@ -18,7 +18,7 @@ export class MatchesComponent implements OnInit {
 
   constructor(private db: AngularFirestore, private firebaseService: FirebaseService) {
     // console.log('test');
-    db.collection('matches').snapshotChanges()
+    db.collection('matches', ref => ref.orderBy('created_at')).snapshotChanges()
       .subscribe( (data) => {
         console.log( 'matches fetched...' );
         this.matches = new Array();
@@ -32,7 +32,7 @@ export class MatchesComponent implements OnInit {
     if ( firebaseService.user === undefined ) {
       firebaseService.loggedIn.subscribe(
         (user) => {
-          console.log( user.uid );
+          // console.log( user.uid );
           this.subscription = db.collection('bets', ref => ref.where('user_id', '==', user.uid)).snapshotChanges()
           .subscribe(
             (data) => {
@@ -73,8 +73,8 @@ export class MatchesComponent implements OnInit {
     if ( this.firebaseService.user === undefined ) {
       alert('Please login to bet!');
     } else {
-      console.log( matchId );
-      console.log( winnerTeamId );
+      // console.log( matchId );
+      // console.log( winnerTeamId );
       const item = {
         'match_id': matchId,
         'user_id': this.firebaseService.user.uid,

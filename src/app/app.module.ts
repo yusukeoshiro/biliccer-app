@@ -19,6 +19,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 
 import { FirebaseService } from './firebase.service';
 import { ProfileComponent } from './profile/profile.component';
+import { AdminComponent } from './admin/admin.component';
 
 
 const appRoutes: Routes = [
@@ -29,6 +30,7 @@ const appRoutes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'teams', component: TeamsComponent },
   { path: 'teams/:id', component: TeamComponent },
+  { path: 'admin', component: AdminComponent },
 ];
 
 
@@ -41,7 +43,8 @@ const appRoutes: Routes = [
     BetsComponent,
     TeamsComponent,
     TeamComponent,
-    ProfileComponent
+    ProfileComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
