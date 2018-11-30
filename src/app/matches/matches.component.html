@@ -1,7 +1,9 @@
 
 <div class="container" style="margin-top: 40px;">
 
-  <div class="card horizontal" *ngFor="let match of matches">
+  <div class="card horizontal" *ngFor="let match of matches" 
+  [ngClass]="{
+    finished: match.status === 'Finished', 'yellow lighten-5': match.status === 'In Progress...'}">
     <div class="card-stacked">
       <div class="card-content">
         <div class="center">
@@ -21,7 +23,7 @@
               <div>{{ match.team1_bets }}</div>
               <div>
                   <a class="waves-effect waves-light btn-small blue darken-2"
-                    [ngClass]="{disabled: getBettedTeam(match) !== null}"
+                    [ngClass]="{disabled: getBettedTeam(match) !== null || match.status !== 'Stand by'}"
                     (click)="placeBet(match.id, match.team1.id);">Bet on {{ match.team1.name }}</a> <br/>
                   <span *ngIf="getBettedTeam(match) === match.team1.id">Your bet</span>
               </div>
@@ -30,7 +32,7 @@
               <div>{{ match.team2_bets }}</div>
               <div>
                   <a class="waves-effect waves-light btn-small blue darken-2"
-                    [ngClass]="{disabled: getBettedTeam(match) !== null}"
+                    [ngClass]="{disabled: getBettedTeam(match) !== null || match.status !== 'Stand by'}"
                     (click)="placeBet(match.id, match.team2.id);">Bet on {{ match.team2.name }}</a> <br/>
                   <span *ngIf="getBettedTeam(match) === match.team2.id">Your bet</span>
               </div>

@@ -1,0 +1,41 @@
+<div class="container">
+  <h4>Match Management</h4>
+  <div class="card horizontal" *ngFor="let match of matches" (click)="onMatchSelected(match)">
+    <div class="card-stacked">
+      <div class="card-content">
+        <div class="center">
+          <span style="font-size: 200%;">{{ match.team1.name }}</span>
+          vs
+          <span style="font-size: 200%;">{{ match.team2.name }}</span>
+        </div>
+        <div class="center">
+          {{ match.status }}
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div *ngIf="selectedMatch !== undefined">
+      <div class="modal-content">
+        <h4>{{  selectedMatch.team1.name }} vs {{ selectedMatch.team2.name }}</h4>
+
+        <span>Actions</span> <br/>
+
+        <button class="btn-small" (click)="onMatchWon(selectedMatch, selectedMatch.team1)">{{  selectedMatch.team1.name }} won</button> <br/><br/>
+        <button class="btn-small" (click)="onMatchWon(selectedMatch, selectedMatch.team2)">{{  selectedMatch.team2.name }} won</button> <br/> <br/>
+        <button class="btn-small" (click)="onMatchReset(selectedMatch)">Reset</button> <br/><br/>
+        <button class="btn-small" (click)="onMatchStart(selectedMatch)">Start Game</button> <br/><br/>
+        <button class="btn-small" (click)="onMatchDelete(selectedMatch)">Delete</button> <br/><br/>
+
+      </div>
+      <div class="modal-footer">
+        <a class="modal-close waves-effect waves-green btn-flat">Close</a>
+      </div>
+        
+    </div>
+  </div>
+      
+</div>

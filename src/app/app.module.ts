@@ -20,6 +20,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { FirebaseService } from './firebase.service';
 import { ProfileComponent } from './profile/profile.component';
 import { AdminComponent } from './admin/admin.component';
+import { MatchManagerComponent } from './admin/match-manager/match-manager.component';
 
 
 const appRoutes: Routes = [
@@ -44,7 +45,8 @@ const appRoutes: Routes = [
     TeamsComponent,
     TeamComponent,
     ProfileComponent,
-    AdminComponent
+    AdminComponent,
+    MatchManagerComponent
   ],
   imports: [
     BrowserModule,

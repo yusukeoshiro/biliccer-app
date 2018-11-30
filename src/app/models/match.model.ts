@@ -4,10 +4,10 @@ import { Observable, Subscription } from 'rxjs';
 import { FirebaseService } from '../firebase.service';
 
 export class Match {
-  public id: String;
+  public id: string;
   public team1: Team;
   public team2: Team;
-  public status: String;
+  public status: string;
   public winner: Team;
 
   isInvolved(team) {
@@ -46,6 +46,33 @@ export class Match {
     const item = this.serialize();
     const id = this.db.createId();
     this.db.collection('matches').doc(id).set(item);
+  }
+
+  setWinner (team: Team) {
+    const item = {
+      winning_team_id: team.id,
+      status: 'Finished'
+    };
+    this.db.collection('matches').doc(this.id).update(item);
+  }
+
+  reset () {
+    const item = {
+      winning_team_id: null,
+      status: 'Stand by'
+    };
+    this.db.collection('matches').doc(this.id).update(item);
+  }
+
+  start () {
+    const item = {
+      status: 'In Progress...'
+    };
+    this.db.collection('matches').doc(this.id).update(item);
+  }
+
+  delete () {
+    this.db.collection('matches').doc(this.id).delete();
   }
 
   constructor (private db?: AngularFirestore, doc?, teams?) {

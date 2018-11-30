@@ -78,7 +78,7 @@ export class MatchesComponent implements OnInit {
       const item = {
         'match_id': matchId,
         'user_id': this.firebaseService.user.uid,
-        'winner_team': winnerTeamId
+        'bet_team': winnerTeamId
       };
       const id = matchId + ':' + this.firebaseService.user.uid;
       this.db.collection('bets').doc(id).set(item);
@@ -92,7 +92,7 @@ export class MatchesComponent implements OnInit {
   getBettedTeam ( match ) {
     for ( const bet of this.myBets ) {
       if ( bet.match_id === match.id ) {
-        return bet.winner_team;
+        return bet.bet_team;
       }
     }
     return null;
