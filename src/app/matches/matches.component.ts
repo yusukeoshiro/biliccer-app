@@ -69,7 +69,7 @@ export class MatchesComponent implements OnInit {
 
   }
 
-  placeBet(matchId: String, winnerTeamId: String) {
+  placeBet(matchId: string, winnerTeamId: string) {
     if ( this.firebaseService.user === undefined ) {
       alert('Please login to bet!');
     } else {
@@ -82,6 +82,31 @@ export class MatchesComponent implements OnInit {
       };
       const id = matchId + ':' + this.firebaseService.user.uid;
       this.db.collection('bets').doc(id).set(item);
+
+
+      // increment the bet count
+      const matchesRef = this.db.firestore.collection('matches').doc(matchId);
+      this.db.firestore.runTransaction((transaction) => {
+        return new Promise((resolve) => {
+          transaction.get(matchesRef)
+            .then((doc) => {
+              if ( doc.data().team1.id === winnerTeamId ) {
+                const newCount = doc.data().team1_bets + 1;
+                transaction.update(doc.ref, {
+                  team1_bets: newCount
+                });
+              } else {
+                const newCount = doc.data().team2_bets + 1;
+                transaction.update(doc.ref, {
+                  team2_bets: newCount
+                });
+              }
+              resolve();
+            })
+        });
+      })
+      .then(() => console.log('ok'))
+      .catch(e => console.error('failed', e));
     }
   }
 
