@@ -1,0 +1,23 @@
+.logo {
+    height: 30px;
+    vertical-align:middle;
+}
+.gblue {
+    background-color: #4285F4;
+}
+.ggreen {
+    background-color: #34A853;
+}
+.gred {
+    background-color: #EA4335;
+}
+.gyellow {
+    background-color: #FBBC05;
+}
+
+@media only screen and (min-width: 992px) {
+    .tab {
+        min-width: 200px;
+    }
+}
+  
