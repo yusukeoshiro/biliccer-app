@@ -10,6 +10,28 @@ export class Match {
   public status: string;
   public winner: Team;
 
+  constructor (private db?: AngularFirestore, doc?, teams?) {
+    if ( doc ) {
+      this.id = doc.id;
+      this.status = doc.data().status;
+      for( const team of teams ) {
+        if ( team.id === doc.data().team1.id ) {
+          this.team1 = team;
+          team.matches.push(this);
+        }
+        if ( team.id === doc.data().team2.id ) {
+          this.team2 = team;
+          team.matches.push(this);
+        }
+        if ( team.id === doc.data().winner_id ) {
+          this.winner = team;
+        }
+      }
+    } else {
+      this.status = 'Stand by';
+    }
+  }
+
   isInvolved(team) {
     return this.team1.id === team.id || this.team2.id === team.id
   }
@@ -75,25 +97,5 @@ export class Match {
     this.db.collection('matches').doc(this.id).delete();
   }
 
-  constructor (private db?: AngularFirestore, doc?, teams?) {
-    if ( doc ) {
-      this.id = doc.id;
-      this.status = doc.data().status;
-      for( const team of teams ) {
-        if ( team.id === doc.data().team1.id ) {
-          this.team1 = team;
-          team.matches.push(this);
-        }
-        if ( team.id === doc.data().team2.id ) {
-          this.team2 = team;
-          team.matches.push(this);
-        }
-        if ( team.id === doc.data().winner_id ) {
-          this.winner = team;
-        }
-      }
-    } else {
-      this.status = 'Stand by';
-    }
-  }
+  
 }

@@ -5,5 +5,9 @@
   </div>
 
   <a class="waves-effect waves-light btn large blue darken-2" (click)="signin();" *ngIf="firebaseService.user === undefined">Sign in with Google Account</a>
-  <a class="waves-effect waves-light btn large blue darken-2" (click)="signout();" *ngIf="firebaseService.user !== undefined">Sign Out</a>
+  <div *ngIf="firebaseService.user !== undefined">
+    <img [src]="firebaseService.user.photoUrl" class="circle responsive-img profile-photo"> <br/>
+    <a class="waves-effect waves-light btn large blue darken-2" (click)="signout();" >Sign Out</a>
+  </div>
+  
 </div>

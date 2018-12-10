@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { Team } from '../models/team.model';
 
 @Component({
   selector: 'app-teams',
@@ -15,7 +16,7 @@ export class TeamsComponent implements OnInit {
       .subscribe( (data) => {
         this.teams = new Array();
         for ( const team of data) {
-          this.teams.push( team.payload.doc.data() );
+          this.teams.push( Team.makeTeam(team.payload.doc ));
         }
       })
   }

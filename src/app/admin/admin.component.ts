@@ -23,7 +23,7 @@ export class AdminComponent implements OnInit {
     this.db.collection('teams').get().subscribe(
       (data) => {
         for(const doc of data.docs) {
-          teams.push( new Team(doc) );
+          teams.push( Team.makeTeam(doc) );
         }
 
         this.db.collection('matches').get().subscribe(

@@ -1,5 +1,5 @@
 <ul class="collection">
-  <li class="collection-item" *ngFor="let team of teams">
+  <li class="collection-item" *ngFor="let team of teams" routerLink="/teams/{{team.id}}">
     {{ team.name }}
   </li>
 </ul>

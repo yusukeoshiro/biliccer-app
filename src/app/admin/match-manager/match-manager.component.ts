@@ -25,7 +25,7 @@ export class MatchManagerComponent implements OnInit {
       // console.log(  );
       this.teams = new Array();
       for ( const team of data) {
-        this.teams.push( new Team(team.payload.doc) );
+        this.teams.push( Team.makeTeam(team.payload.doc) );
       }
     });
     

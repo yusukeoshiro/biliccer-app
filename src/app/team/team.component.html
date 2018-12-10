@@ -1,3 +1,27 @@
-<p>
-  team works!
-</p>
+<div class="container" *ngIf="team">
+  <h4>{{ team.name }}</h4>
+  
+  <div class="members-container">
+    <div class="member" *ngFor="let member of team.members">
+      <div class="center">{{ member.displayName }}</div>
+      <div class="center">
+          <img [src]="member.photoUrl" class="circle responsive-img" style="height: 100px;">
+      </div>    
+    </div>      
+  </div>
+
+
+  Add member?  
+  <table>
+    <tr *ngFor="let user of users">
+      <td>
+          <img [src]="user.photoUrl" class="circle responsive-img" style="height: 26px;">
+      </td>
+      <td class="center">
+        {{user.displayName}} / {{user.email}} 
+      </td>
+      <td><button class="btn" (click)="onMemberAdd(team, user);">Add</button></td>
+    </tr>
+  </table>
+
+</div>
