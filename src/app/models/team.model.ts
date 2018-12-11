@@ -24,7 +24,7 @@ export class Team {
     team.winCount = doc.data().win_count;
     team.matches = new Array();
     team.members = new Array();
-    for ( const member of doc.data().members ) {
+    for ( const member of (doc.data().members || []) ) {
       team.members.push( User.makeUserFromObject(member) );      
     }
     return team;

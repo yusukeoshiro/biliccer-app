@@ -14,7 +14,7 @@ import { TeamComponent } from './team/team.component';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireFunctionsModule } from '@angular/fire/functions';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
 import { FirebaseService } from './firebase.service';
@@ -54,6 +54,7 @@ const appRoutes: Routes = [
     AngularFireModule.initializeApp(environment.firebase), // imports firebase/app needed for everything
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
+    AngularFireFunctionsModule,
   ],
   providers: [
     FirebaseService

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, Subscription } from 'rxjs';
 import { FirebaseService } from '../../firebase.service';
+import { AngularFireFunctions } from '@angular/fire/functions';
 import { Team } from '../../models/team.model';
 import { Match } from '../../models/match.model';
 declare var M;
@@ -19,7 +20,8 @@ export class MatchManagerComponent implements OnInit {
   selectedMatch: Match;
   modal;
 
-  constructor(public db: AngularFirestore, private firebaseService: FirebaseService) {
+  constructor(public db: AngularFirestore, private firebaseService: FirebaseService, private fns: AngularFireFunctions) {
+
     db.collection('teams').snapshotChanges()
     .subscribe( (data) => {
       // console.log(  );
@@ -34,7 +36,7 @@ export class MatchManagerComponent implements OnInit {
       this.matches = new Array();
       for ( const doc of data) {
         console.log(doc);
-        this.matches.push( new Match( db, doc.payload.doc, this.teams ) );
+        this.matches.push( new Match( db, doc.payload.doc, this.teams, fns ) );
       }
       console.log(this.matches);
     });

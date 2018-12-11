@@ -2,6 +2,7 @@ import { Team } from './team.model';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, Subscription } from 'rxjs';
 import { FirebaseService } from '../firebase.service';
+import { AngularFireFunctions } from '@angular/fire/functions';
 
 export class Match {
   public id: string;
@@ -10,7 +11,7 @@ export class Match {
   public status: string;
   public winner: Team;
 
-  constructor (private db?: AngularFirestore, doc?, teams?) {
+  constructor (private db?: AngularFirestore, doc?, teams?, private fns?: AngularFireFunctions) {
     if ( doc ) {
       this.id = doc.id;
       this.status = doc.data().status;
@@ -76,6 +77,20 @@ export class Match {
       status: 'Finished'
     };
     this.db.collection('matches').doc(this.id).update(item);
+
+
+    const onGameEnd = this.fns.httpsCallable('onGameEnd');
+    onGameEnd({
+      matchId: this.id,
+      winnerTeamId: team.id
+    }).subscribe(
+      (data) => {
+        console.log(data);
+        console.log('success');
+      }
+    );
+
+
   }
 
   reset () {
