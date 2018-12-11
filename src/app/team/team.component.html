@@ -8,7 +8,7 @@
           <img [src]="member.photoUrl" class="circle responsive-img" style="height: 100px;">
       </div>    
       <div class="center">
-        <button class="btn-small" (click)="onMemberRemove(team, member);">Remove</button>
+        <button class="btn-flat" (click)="onMemberRemove(team, member);">Remove</button>
       </div>
     </div>      
     <div style="clear:both;"></div>
@@ -24,7 +24,7 @@
       <td class="center">
         {{user.displayName}} / {{user.email}} 
       </td>
-      <td><button class="btn" (click)="onMemberAdd(team, user);" [disabled]='team.containsMember(user.uid)'>Add</button></td>
+      <td><button class="btn blue darken-2" (click)="onMemberAdd(team, user);" [disabled]='team.containsMember(user.uid)'>Add</button></td>
     </tr>
   </table>
 
