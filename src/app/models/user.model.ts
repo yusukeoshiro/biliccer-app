@@ -8,6 +8,7 @@ export class User {
   constructor ( ) { }
 
   public static makeUser( doc ) {
+    console.log(doc);
     const user = new User();
     user.uid = doc.id;
     user.displayName = doc.data().display_name;
@@ -19,7 +20,7 @@ export class User {
 
   public static makeUserFromObject(obj) {
     const user = new User();
-    user.uid = obj.id;
+    user.uid = obj.uid;
     user.displayName = obj.display_name;
     user.winCount = obj.win_count;
     user.email = obj.email;
@@ -35,7 +36,7 @@ export class User {
       display_name: this.displayName,
       win_count: this.winCount,
       email: this.email,
-        photo_url: this.photoUrl,
+      photo_url: this.photoUrl,
     };
   }
 }

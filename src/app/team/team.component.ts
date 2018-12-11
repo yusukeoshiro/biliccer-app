@@ -18,9 +18,11 @@ export class TeamComponent implements OnInit {
   constructor( private route: ActivatedRoute, private db: AngularFirestore ) {
     const id = this.route.snapshot.params['id'];    
     console.log( id );
-    db.collection('teams').doc(id).get().subscribe(
-      (doc) => {
-        this.team = Team.makeTeam( doc, db );
+
+    db.collection('teams').doc(id).snapshotChanges().subscribe(
+      (data) => {
+        console.log( data.payload );
+        this.team = Team.makeTeam( data.payload, db );
       }
     );
 

@@ -30,22 +30,32 @@ export class Team {
     return team;
   }
 
-  public addMember ( user: User ) {
-    console.log(user);
-    const tempMembers = new Array();
+  public containsMember (userId: string) {
     for (const member of this.members) {
-      tempMembers.push( user.serialize() )
+      if ( userId === member.uid ) {
+        return true;
+      }
     }
+    return false;
+  }
+
+  public addMember ( user: User ) {
+    const tempMembers = new Array();
+    console.log('1')
+    for (const member of this.members) {
+      tempMembers.push( member.serialize() )
+      console.log('2')
+    }    
     tempMembers.push( user.serialize() )
+    console.log('3')
     const item = {
       members: tempMembers
     };
-    console.log( item );
-    console.log(this.id);
     this.db.collection('teams').doc(this.id).update(item);
   }
 
   public removeMember ( user: User ) {
+    console.log( user );
     const tempMembers = new Array();
     for (const member of this.members) {
       if ( member.uid !== user.uid) {
@@ -55,6 +65,7 @@ export class Team {
     const item = {
       members: tempMembers
     };
+    console.log( item );
     this.db.collection('teams').doc(this.id).update(item);
   }
 

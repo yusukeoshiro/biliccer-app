@@ -12,8 +12,10 @@
 
     <tbody>
       <tr *ngFor="let team of teams">
-        <td>{{team.name}}</td>
-        <td>{{team.win_count}}</td>
+        <td>
+          <a routerLink="/teams/{{team.id}}">{{team.name}}</a>          
+        </td>
+        <td>{{team.winCount}}</td>
       </tr>
     </tbody>
   </table>
@@ -34,7 +36,7 @@
       <tbody>
         <tr *ngFor="let user of users">
           <td>{{user.displayName}}</td>
-          <td>{{user.win_count}}</td>
+          <td>{{user.winCount}}</td>
         </tr>
       </tbody>
     </table>

@@ -18,8 +18,8 @@ export class MatchesComponent implements OnInit {
 
   constructor(private db: AngularFirestore, private firebaseService: FirebaseService) {
     // console.log('test');
-    db.collection('matches', ref => ref.orderBy('created_at')).snapshotChanges()
-      .subscribe( (data) => {
+    db.collection('matches', ref => ref.orderBy('created_at')).snapshotChanges().subscribe( 
+      (data) => {
         console.log( 'matches fetched...' );
         this.matches = new Array();
         for ( const match of data) {
@@ -27,14 +27,13 @@ export class MatchesComponent implements OnInit {
           element['id'] = match.payload.doc.id;
           this.matches.push( element );
         }
-      });
+      }
+    );
 
     if ( firebaseService.user === undefined ) {
       firebaseService.loggedIn.subscribe(
         (user) => {
-          // console.log( user.uid );
-          this.subscription = db.collection('bets', ref => ref.where('user_id', '==', user.uid)).snapshotChanges()
-          .subscribe(
+          this.subscription = db.collection('bets', ref => ref.where('user_id', '==', user.uid)).snapshotChanges().subscribe(
             (data) => {
               this.myBets = new Array();
               for ( const bet of data ) {
@@ -50,8 +49,7 @@ export class MatchesComponent implements OnInit {
         }
       );
     } else {
-      this.subscription = db.collection('bets', ref => ref.where('user_id', '==', firebaseService.user.uid)).snapshotChanges()
-      .subscribe(
+      this.subscription = db.collection('bets', ref => ref.where('user_id', '==', firebaseService.user.uid)).snapshotChanges().subscribe(
         (data) => {
           this.myBets = new Array();
           for ( const bet of data ) {
@@ -65,16 +63,12 @@ export class MatchesComponent implements OnInit {
         () => { this.subscription.unsubscribe(); }
       );
     }
-
-
   }
 
   placeBet(matchId: string, winnerTeamId: string) {
     if ( this.firebaseService.user === undefined ) {
       alert('Please login to bet!');
     } else {
-      // console.log( matchId );
-      // console.log( winnerTeamId );
       const item = {
         'match_id': matchId,
         'user_id': this.firebaseService.user.uid,

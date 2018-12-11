@@ -28,13 +28,12 @@ export class FirebaseService {
                 this.user.uid = user.uid;
                 this.user.winCount = 0;
                 this.user.photoUrl = user.photoURL;
-
-                this.loggedIn.emit( this.user );
                 angularFirestore.collection('users').doc(this.user.uid).set(this.user.serialize());
               } else {
                 this.user = User.makeUser(data);
-                this.loggedIn.emit( user );
+                
               }
+              this.loggedIn.emit( this.user );
             }
           );
         } else {

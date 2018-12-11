@@ -1,5 +1,7 @@
 .member { 
     width: 100px;
+    float: left;
+    padding: 5px;
 }
 
 .members-container {

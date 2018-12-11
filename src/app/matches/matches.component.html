@@ -7,9 +7,13 @@
     <div class="card-stacked">
       <div class="card-content">
         <div class="center">
-          <span style="font-size: 200%;">{{ match.team1.name }}</span>
+          <a routerLink="/teams/{{match.team1.id}}">
+            <span style="font-size: 200%;">{{ match.team1.name }}</span>
+          </a>          
           vs
-          <span style="font-size: 200%;">{{ match.team2.name }}</span>
+          <a routerLink="/teams/{{match.team2.id}}">
+            <span style="font-size: 200%;">{{ match.team2.name }}</span>
+          </a>          
         </div>
         <div class="center">
           {{ match.status }}
