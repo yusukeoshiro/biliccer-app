@@ -36,7 +36,11 @@ export class MatchManagerComponent implements OnInit {
       this.matches = new Array();
       for ( const doc of data) {
         console.log(doc);
-        this.matches.push( new Match( db, doc.payload.doc, this.teams, fns ) );
+        const match = new Match( db, doc.payload.doc, this.teams, fns )
+        if ( this.selectedMatch && this.selectedMatch.id === match.id ) {
+          this.selectedMatch = match;
+        }
+        this.matches.push( match );
       }
       console.log(this.matches);
     });
@@ -48,22 +52,48 @@ export class MatchManagerComponent implements OnInit {
   }
 
   onMatchWon (match, winningTeam) {
-    match.setWinner( winningTeam );
+    if ( match.status === 'Finished' ) {
+      alert('The is already finished');
+      return;
+    }
+
+    if ( match.status !== 'In Progress...' ) {
+      alert('Please start the match before setting the winner');
+      return;
+    }
+
+    if (confirm('Are you sure?')) {
+      match.setWinner( winningTeam, function() {
+        alert( `winner is set to ${winningTeam.name}` );
+      });
+  
+    }
   }
 
   onMatchReset (match) {
-    match.reset();
+    if (confirm('Are you sure?')) {
+      match.reset(function(){
+        alert('Reset complete');
+      });  
+    }
   }
   
   onMatchStart (match) {
-    match.start();
+    if (confirm('Are you sure?')) {
+      match.start(function() {
+        alert('Match started!');
+      });
+    }    
   }
 
   onMatchDelete (match) {
     if (confirm('Are you sure?')) {
-      match.delete();
-    }    
+      match.delete(function() {
+        alert('Match deleted!');
+      });
+    }
   }
+
 
   ngOnInit() {
     document.addEventListener('DOMContentLoaded', () => {

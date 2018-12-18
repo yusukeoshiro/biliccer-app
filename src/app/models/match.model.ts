@@ -65,18 +65,18 @@ export class Match {
     return item;
   }
 
-  insert(){
+  insert(callback?){
     const item = this.serialize();
     const id = this.db.createId();
-    this.db.collection('matches').doc(id).set(item);
+    this.db.collection('matches').doc(id).set(item).then(callback());
   }
 
-  setWinner (team: Team) {
+  setWinner (team: Team, callback?) {
     const item = {
       winning_team_id: team.id,
       status: 'Finished'
     };
-    this.db.collection('matches').doc(this.id).update(item);
+    this.db.collection('matches').doc(this.id).update(item).then(callback());
 
 
     const onGameEnd = this.fns.httpsCallable('onGameEnd');
@@ -93,23 +93,23 @@ export class Match {
 
   }
 
-  reset () {
+  reset (callback?) {
     const item = {
       winning_team_id: null,
       status: 'Stand by'
     };
-    this.db.collection('matches').doc(this.id).update(item);
+    this.db.collection('matches').doc(this.id).update(item).then(callback());
   }
 
-  start () {
+  start (callback?) {
     const item = {
       status: 'In Progress...'
     };
-    this.db.collection('matches').doc(this.id).update(item);
+    this.db.collection('matches').doc(this.id).update(item).then(callback());
   }
 
-  delete () {
-    this.db.collection('matches').doc(this.id).delete();
+  delete (callback?) {
+    this.db.collection('matches').doc(this.id).delete().then(callback());
   }
 
   

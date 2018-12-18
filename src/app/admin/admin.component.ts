@@ -39,7 +39,9 @@ export class AdminComponent implements OnInit {
 
             match.team1 = team1;
             match.team2 = team2;
-            match.insert();
+            match.insert(function(){
+              alert('Match created!');
+            });
           }
         )
       }
