@@ -12,7 +12,7 @@ export class TeamsComponent implements OnInit {
   teams: Array<any> = new Array();
 
   constructor(db: AngularFirestore) {
-    db.collection('teams').snapshotChanges()
+    db.collection('teams', ref => ref.orderBy('name', 'asc')).snapshotChanges()
       .subscribe( (data) => {
         this.teams = new Array();
         for ( const team of data) {
