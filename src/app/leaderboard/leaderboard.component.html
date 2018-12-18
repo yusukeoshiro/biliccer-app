@@ -6,6 +6,7 @@
     <thead>
       <tr>
           <th>Team Name</th>
+          <th>Members</th>
           <th>Wins</th>
       </tr>
     </thead>
@@ -13,7 +14,10 @@
     <tbody>
       <tr *ngFor="let team of teams">
         <td>
-          <a routerLink="/teams/{{team.id}}">{{team.name}}</a>          
+          <a routerLink="/teams/{{team.id}}">{{team.name}}</a>
+        </td>
+        <td>
+          <img *ngFor="let member of team.members" [src]="member.photoUrl" class="circle responsive-img" style="height: 24px; margin-right: 10px;">
         </td>
         <td>{{team.winCount}}</td>
       </tr>
@@ -35,7 +39,10 @@
 
       <tbody>
         <tr *ngFor="let user of users">
-          <td>{{user.displayName}}</td>
+          <td>
+            <img [src]="user.photoUrl" class="circle responsive-img" style="height: 24px; margin-right: 10px; vertical-align: middle;">
+            {{user.displayName}} 
+          </td>
           <td>{{user.winCount}}</td>
         </tr>
       </tbody>
